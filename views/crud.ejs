@@ -1,0 +1,76 @@
+<h2 class="mb-4">CRUD – Products tábla (csak admin)</h2>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card mb-4">
+      <div class="card-header">Új termék felvitele</div>
+      <div class="card-body">
+        <form action="/crud" method="post">
+          <div class="mb-3">
+            <label class="form-label">Név</label>
+            <input type="text" class="form-control" name="name" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Ár</label>
+            <input type="number" step="0.01" class="form-control" name="price" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Leírás</label>
+            <textarea class="form-control" name="description"></textarea>
+          </div>
+          <button type="submit" class="btn btn-success w-100">Hozzáadás</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">Termékek listája</div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered align-middle">
+            <thead class="table-light">
+              <tr><th>ID</th><th>Név</th><th>Ár</th><th>Leírás</th><th>Műveletek</th></tr>
+            </thead>
+            <tbody>
+              <% products.forEach(p => { %>
+                <tr>
+                  <td><%= p.id %></td>
+                  <td><%= p.name %></td>
+                  <td><%= p.price %></td>
+                  <td><%= p.description %></td>
+                  <td>
+                    <form action="/crud/<%= p.id %>/update" method="post" class="row g-2 align-items-center mb-1">
+                      <div class="col-3">
+                        <input type="text" class="form-control form-control-sm" name="name" value="<%= p.name %>">
+                      </div>
+                      <div class="col-2">
+                        <input type="number" step="0.01" class="form-control form-control-sm" name="price" value="<%= p.price %>">
+                      </div>
+                      <div class="col-4">
+                        <input type="text" class="form-control form-control-sm" name="description" value="<%= p.description %>">
+                      </div>
+                      <div class="col-3 d-grid">
+                        <button type="submit" class="btn btn-sm btn-primary">Módosítás</button>
+                      </div>
+                    </form>
+                    <form action="/crud/<%= p.id %>/delete" method="post" class="d-inline">
+                      <button type="submit" class="btn btn-sm btn-danger mt-1">Törlés</button>
+                    </form>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MEGJEGYZÉS:
+Az adatbázis rögzítése itt azt jelenti, hogy a CRUD műveletek (INSERT, UPDATE, DELETE)
+minden esetben a SQLite adatbázis "products" tábláját módosítják.
+Ha másik táblát szeretnél, a kódban a "products" táblanevet és mezőket kell átírnod
+(a CREATE TABLE résznél és a fenti SQL-ekben). -->

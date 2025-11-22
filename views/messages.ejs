@@ -1,0 +1,37 @@
+<h2 class="mb-4">Üzenetek</h2>
+<p class="text-muted">Ezt az oldalt csak bejelentkezett felhasználó láthatja.</p>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Küldő felhasználó</th>
+        <th scope="col">Név</th>
+        <th scope="col">Email</th>
+        <th scope="col">Üzenet</th>
+        <th scope="col">Küldés ideje</th>
+        <% if (currentUser && currentUser.role === 'admin') { %>
+          <th scope="col">Művelet</th>
+        <% } %>
+      </tr>
+    </thead>
+    <tbody>
+      <% messages.forEach(m => { %>
+        <tr>
+          <td><%= m.username || 'ismeretlen' %></td>
+          <td><%= m.name %></td>
+          <td><%= m.email %></td>
+          <td><%= m.message %></td>
+          <td><%= m.created_at %></td>
+          <% if (currentUser && currentUser.role === 'admin') { %>
+            <td>
+              <form action="/messages/<%= m.id %>/delete" method="post" class="d-inline">
+                <button type="submit" class="btn btn-sm btn-danger">Törlés</button>
+              </form>
+            </td>
+          <% } %>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

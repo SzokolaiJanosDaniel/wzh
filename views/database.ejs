@@ -1,0 +1,84 @@
+<h2 class="mb-4">Adatbázis menü</h2>
+
+<div class="row g-4">
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-header bg-primary text-white">
+        Felhasználók (users)
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr><th>ID</th><th>Felhasználónév</th><th>Szerep</th></tr>
+            </thead>
+            <tbody>
+              <% data.users.forEach(u => { %>
+                <tr>
+                  <td><%= u.id %></td>
+                  <td><%= u.username %></td>
+                  <td><%= u.role %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-header bg-success text-white">
+        Üzenetek (messages)
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr><th>ID</th><th>Név</th><th>Email</th><th>Üzenet</th><th>Időpont</th></tr>
+            </thead>
+            <tbody>
+              <% data.messages.forEach(m => { %>
+                <tr>
+                  <td><%= m.id %></td>
+                  <td><%= m.name %></td>
+                  <td><%= m.email %></td>
+                  <td><%= m.message %></td>
+                  <td><%= m.created_at %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-header bg-warning">
+        Termékek (products)
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr><th>ID</th><th>Név</th><th>Ár</th><th>Leírás</th></tr>
+            </thead>
+            <tbody>
+              <% data.products.forEach(p => { %>
+                <tr>
+                  <td><%= p.id %></td>
+                  <td><%= p.name %></td>
+                  <td><%= p.price %></td>
+                  <td><%= p.description %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
